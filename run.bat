@@ -1,6 +1,7 @@
 @echo off
+set PYTHONIOENCODING=utf-8
 echo ========================================
-echo   Tourist Shield Application Launcher
+echo   Tourist Shield Application Launcher (Production)
 echo ========================================
 echo.
 
@@ -15,14 +16,14 @@ if not exist "instance\tourist_shield.db" (
 )
 
 REM Start the application
-echo Starting Tourist Shield Application...
+echo Starting Tourist Shield Production Server...
 echo.
 echo Once started, open your browser and go to:
 echo http://localhost:5000
 echo.
 echo Press Ctrl+C to stop the server
 echo.
-python app.py
+python -m waitress --host=127.0.0.1 --port=5000 app:app
 
 REM Keep the window open after the application exits
 pause
