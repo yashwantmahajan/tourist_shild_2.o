@@ -1,11 +1,37 @@
+# Python
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
+*.egg
+*.egg-info/
+
+# Virtual environments
 venv/
 env/
+.venv/
+
+# Environment secrets
 .env
+.env.*
+
+# SQLite database (generated at runtime)
 instance/
 *.sqlite3
-tourist_shield.db
+*.db
+
+# IDE
 .vscode/
 .idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated PDF reports
+static/pdf_reports/
+
+# Logs
+*.log

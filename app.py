@@ -15,10 +15,10 @@ import math
 
 # Initialize Flask App
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'super-secret-shield-ai-key-2024'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tourist_shield.db'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'change-me-in-production-secret-key')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///tourist_shield.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['GOOGLE_MAPS_KEY'] = os.environ.get('GOOGLE_MAPS_KEY', 'AIzaSyDTQj3zpCqX9LIsxSyYYG2SrEyNShNoNHk')
+app.config['GOOGLE_MAPS_KEY'] = os.environ.get('GOOGLE_MAPS_KEY', '')
 
 # Initialize extensions
 db.init_app(app)
@@ -42,14 +42,6 @@ def inject_config():
     return {'GOOGLE_MAPS_KEY': app.config.get('GOOGLE_MAPS_KEY', '')}
 
 # ============== ERROR HANDLERS ==============
-
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('404.html'), 404
-
-@app.errorhandler(500)
-def internal_error(e):
-    return render_template('404.html'), 500
 
 # ============== PUBLIC ROUTES ==============
 
@@ -1584,9 +1576,7 @@ def forbidden(e):
 
 # ============== RUN APPLICATION ==============
 
-import os
-
-port = int(os.environ.get("PORT", 10000))
-
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=port)
+    port = int(os.environ.get("PORT", 5000))
+    debug = os.environ.get("FLASK_DEBUG", "false").lower() == "true"
+    app.run(host="0.0.0.0", port=port, debug=debug)

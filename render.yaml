@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: tourist-shield
+    env: python
+    buildCommand: "pip install -r requirements.txt && python init_db.py"
+    startCommand: "gunicorn -b 0.0.0.0:$PORT --workers=2 --timeout=120 app:app"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: FLASK_APP
+        value: app.py
+      - key: PYTHONUNBUFFERED
+        value: "1"
