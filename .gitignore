@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+venv/
+env/
+.env
+instance/
+*.sqlite3
+tourist_shield.db
+.vscode/
+.idea/

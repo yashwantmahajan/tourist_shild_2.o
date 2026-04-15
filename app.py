@@ -1584,9 +1584,9 @@ def forbidden(e):
 
 # ============== RUN APPLICATION ==============
 
-if __name__ == '__main__':
-    # IMPORTANT: Must run on 127.0.0.1 (localhost), NOT 0.0.0.0
-    # Chrome only allows Geolocation API on: https:// OR localhost/127.0.0.1
-    # Accessing via LAN IP (http://192.168.x.x) will SILENTLY BLOCK GPS — no popup shown!
-    # To access from other devices: use HTTPS or a tunnel like ngrok
-    app.run(debug=True, host='127.0.0.1', port=5000)
+import os
+
+port = int(os.environ.get("PORT", 10000))
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=port)
